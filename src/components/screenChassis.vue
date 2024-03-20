@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import twoRedLights from './twoRedLights.vue';
 import bigRedLightAndSpeaker from './bigRedLightAndSpeaker.vue';
+import mainScreen from './mainScreen.vue';
+import triangleCutout from './triangleCutout.vue';
 </script>
 
 <template>
     <div class="middle">
         <div class="screenChassis">
-            <div class="cutout"></div>
+            <triangleCutout></triangleCutout>
             <twoRedLights></twoRedLights>
-            <div class="screen"></div>
+            <mainScreen></mainScreen>
             <bigRedLightAndSpeaker></bigRedLightAndSpeaker>
         </div>
     </div>
@@ -36,23 +38,5 @@ import bigRedLightAndSpeaker from './bigRedLightAndSpeaker.vue';
     justify-content: center;
     align-items: center;
     position: relative;
-}
-
-.cutout {
-    position: absolute;
-    bottom: -4px;
-    left: -4px;
-    width: 70px;
-    height: 70px;
-    background: #d30940;
-    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
-    transform: rotate(270deg);
-}
-
-.screen {
-    background: #282828;
-    border-radius: 15px;
-    width: 90%;
-    height: 75%;
 }
 </style>

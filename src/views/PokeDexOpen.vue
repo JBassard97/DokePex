@@ -5,7 +5,7 @@ import dPad from '@/components/dPad.vue';
 import greenScreen from '@/components/greenScreen.vue';
 import aButton from '@/components/aButton.vue';
 import redBlueButtons from '@/components/redBlueButtons.vue';
-import screen from '@/components/screen.vue';
+import screenChassis from '@/components/screenChassis.vue';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import screen from '@/components/screen.vue';
         <allLights></allLights>
         <dividingLine></dividingLine>
 
-        <screen></screen>
+        <screenChassis></screenChassis>
 
         <div class="openFooter">
             <dPad></dPad>
