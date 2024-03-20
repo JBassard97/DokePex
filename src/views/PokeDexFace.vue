@@ -19,7 +19,7 @@ import closedDivot from "@/components/closedDivot.vue";
 
 <style>
 .face {
-  background: #db092c;
+  background: #d30940;
   border-radius: 20px;
   width: 75vw;
   height: 95vh;
