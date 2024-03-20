@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
     <div class="allLights">
+        <RouterLink to="/" class="closeLink"></RouterLink>
         <div class="bigBlueLight"></div>
         <div class="threeLights">
             <div class="redLight"></div>
@@ -13,6 +15,14 @@
 </template>
 
 <style>
+.closeLink {
+    z-index: 2;
+    cursor: pointer;
+    width: 200px;
+    height: 60px;
+    position: absolute;
+}
+
 .allLights {
     max-width: 200px;
     height: 60px;

@@ -36,24 +36,25 @@ const handleDirection = (direction: string) => {
 .square {
     width: 30px;
     height: 30px;
-    background: darkslategrey;
+    background: #313131;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid rgba(28, 46, 46, 0.5);
+    border: 3px solid rgba(3, 5, 5, 0.5);
 }
 
 .indent {
     width: 40%;
     height: 2px;
-    background-color: rgba(28, 46, 46, 0.5);
+    background-color: rgba(3, 5, 5, 0.5);
     transform-origin: center;
 }
 
 .dot {
     width: 10px;
     height: 10px;
-    background: rgba(28, 46, 46, 0.5);
+    background: transparent;
+    border: 3px solid rgba(3, 5, 5, 0.5);
     border-radius: 50%;
 }
 

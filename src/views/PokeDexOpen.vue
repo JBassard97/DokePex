@@ -5,12 +5,16 @@ import dPad from '@/components/dPad.vue';
 import greenScreen from '@/components/greenScreen.vue';
 import aButton from '@/components/aButton.vue';
 import redBlueButtons from '@/components/redBlueButtons.vue';
+import screen from '@/components/screen.vue';
 </script>
 
 <template>
     <div class="face">
         <allLights></allLights>
         <dividingLine></dividingLine>
+
+        <screen></screen>
+
         <div class="openFooter">
             <dPad></dPad>
             <greenScreen></greenScreen>
@@ -28,6 +32,6 @@ import redBlueButtons from '@/components/redBlueButtons.vue';
     position: absolute;
     justify-content: space-evenly;
     align-items: center;
-    bottom: -20px;
+    bottom: -25px;
 }
 </style>

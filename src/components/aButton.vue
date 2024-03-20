@@ -9,19 +9,19 @@ const handleAPress = () => console.log("Pressed A")
 <style>
 .aButton {
     border-radius: 50%;
-    background-color: darkslategrey;
+    background-color: #313131;
     width: 50px;
     height: 50px;
     margin-bottom: 130px;
     cursor: pointer;
     overflow: hidden;
-    border: 3px solid rgba(28, 46, 46, 0.5);
+    border: 3px solid rgba(3, 5, 5, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
     font-family: sans-serif;
-    color: rgba(28, 46, 46, 0.5);
+    color: rgba(3, 5, 5, 0.5);
     z-index: 3;
 }
 

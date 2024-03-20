@@ -37,4 +37,10 @@ const handleButtonPress = (color: string) => {
 .blueButton {
     background: #0b7084;
 }
+
+@media (max-width: 469px) {
+    .redBlueButtons {
+        bottom: 117px;
+    }
+}
 </style>
