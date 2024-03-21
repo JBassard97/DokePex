@@ -13,12 +13,11 @@
 <style>
 .bigRedLightAndSpeaker {
     width: 70%;
-    height: 45px;
+    height: 35px;
     position: absolute;
     bottom: 10px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .bigRedLight {
@@ -27,6 +26,7 @@
     border-radius: 50%;
     background: #b91446;
     border: 2px solid rgba(3, 5, 5, 0.5);
+    margin-left: 10px;
 }
 
 .speaker {

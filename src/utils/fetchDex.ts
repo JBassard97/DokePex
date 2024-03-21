@@ -41,58 +41,53 @@ async function getSpritesNamesNumbers(urlArray: any) {
 // await console.log(await getSpritesNamesNumbers(await getURLs(2, 0)));
 
 async function getRegionDex(generation: number) {
+  let results: any = [];
+
   switch (generation) {
     //   ! KANT0
     case 1:
-      let kantoResults = await getSpritesNamesNumbers(await getURLs(151, 0));
-      await console.log(kantoResults);
+      results = await getSpritesNamesNumbers(await getURLs(151, 0));
       break;
 
     //   ! JOHTO
     case 2:
-      let johtoResults = await getSpritesNamesNumbers(await getURLs(100, 151));
-      await console.log(johtoResults);
+      results = await getSpritesNamesNumbers(await getURLs(100, 151));
       break;
 
     //   ! HOENN
     case 3:
-      let hoennResults = await getSpritesNamesNumbers(await getURLs(135, 251));
-      await console.log(hoennResults);
+      results = await getSpritesNamesNumbers(await getURLs(135, 251));
       break;
 
     //   ! SINNOH
     case 4:
-      let sinnohResults = await getSpritesNamesNumbers(await getURLs(107, 386));
-      await console.log(sinnohResults);
+      results = await getSpritesNamesNumbers(await getURLs(107, 386));
       break;
 
     //   ! UNOVA
     case 5:
-      let unovaResults = await getSpritesNamesNumbers(await getURLs(156, 493));
-      console.log(unovaResults);
+      results = await getSpritesNamesNumbers(await getURLs(156, 493));
       break;
 
     //   ! KALOS
     case 6:
-      let kalosResults = await getSpritesNamesNumbers(await getURLs(72, 649));
-      console.log(kalosResults);
+      results = await getSpritesNamesNumbers(await getURLs(72, 649));
       break;
 
     //   ! ALOLA
     case 7:
-      let alolaResults = await getSpritesNamesNumbers(await getURLs(88, 721));
-      console.log(alolaResults);
+      results = await getSpritesNamesNumbers(await getURLs(88, 721));
       break;
 
     //   ! GALAR
     case 8:
-      let galarResults = await getSpritesNamesNumbers(await getURLs(89, 809));
-      console.log(galarResults);
+      results = await getSpritesNamesNumbers(await getURLs(89, 809));
       break;
 
     default:
       console.error(`Generation ${generation} not found!`);
   }
+  return results;
 }
 
 export { getRegionDex };

@@ -1,12 +1,102 @@
+<script setup lang="ts">
+import { ref, onMounted, markRaw } from 'vue';
+import MainMenu from '@/components/MainMenu.vue';
+import Dexes from "./RegionDexes/index";
+
+const animationComplete = ref(false);
+const currentComponent: any = ref(null);
+const selectedGeneration = ref(0);
+
+onMounted(() => { console.log("Mounted"); currentComponent.value = ''; })
+
+function handleAnimationEnd() {
+    animationComplete.value = true;
+    console.log("animation done");
+    updateCurrentComponent(MainMenu);
+}
+
+function updateCurrentComponent(newComponent: any) {
+    currentComponent.value = markRaw(newComponent);
+}
+
+function handleGenSelection(genNumber: number) {
+    console.log("selected generation:", genNumber);
+    selectedGeneration.value = genNumber;
+    switch (genNumber) {
+        case 1:
+            currentComponent.value = Dexes.KantoDex;
+            break;
+        case 2:
+            currentComponent.value = Dexes.JohtoDex;
+            break;
+        case 3:
+            currentComponent.value = Dexes.HoennDex;
+            break;
+        case 4:
+            currentComponent.value = Dexes.SinnohDex;
+            break;
+        case 5:
+            currentComponent.value = Dexes.UnovaDex;
+            break;
+        case 6:
+            currentComponent.value = Dexes.KalosDex;
+            break;
+        case 7:
+            currentComponent.value = Dexes.AlolaDex;
+            break;
+        case 8:
+            currentComponent.value = Dexes.GalarDex;
+            break;
+    }
+    // currentComponent.value=useASwitchStateMentToRenderOneOfEightComponents
+}
+
+</script>
+
 <template>
-    <div class="screen"></div>
+    <div class="screen flash" @animationend="handleAnimationEnd">
+        <component :is="currentComponent" :genNumber="selectedGeneration" @selectGeneration="handleGenSelection">
+        </component>
+    </div>
 </template>
 
 <style>
 .screen {
-    background: #282828;
     border-radius: 15px;
     width: 90%;
     height: 75%;
+    overflow: scroll;
+}
+
+.screen::-webkit-scrollbar {
+    display: none;
+}
+
+/* Flash animation */
+@keyframes flashAnimation {
+    0% {
+        background-color: #282828;
+        box-shadow: none;
+        /* Start with dark background color */
+    }
+
+    50% {
+        background-color: #83f3f9;
+        box-shadow: 0 0 10px 5px rgba(131, 243, 249, 0.7);
+        /* Flash to light background color */
+    }
+
+    100% {
+        background-color: #83f3f9;
+        box-shadow: 0 0 10px 5px rgba(131, 243, 249, 0.7);
+        /* End with #0cecf6 background */
+    }
+}
+
+.flash {
+    animation: flashAnimation 0.4s ease-in-out 2 0.7s;
+    animation-fill-mode: forwards;
+    background-color: #282828;
+    /* Initial dark background color */
 }
 </style>

@@ -1,9 +1,16 @@
 <script setup lang="ts">
-const handleAPress = () => console.log("Pressed A")
+import { ref } from 'vue';
+
+import A_Button_Press from "@/assets/A_Button_Press.mp3";
+const audioPlayer: any = ref(null);
+const audioSrc = A_Button_Press;
+
+const handleAPress = () => { console.log("Pressed A"); audioPlayer.value.play(); };
 </script>
 
 <template>
     <div class="aButton" @click="handleAPress">A</div>
+    <audio ref="audioPlayer" :src="audioSrc"></audio>
 </template>
 
 <style>
@@ -12,7 +19,7 @@ const handleAPress = () => console.log("Pressed A")
     background-color: #313131;
     width: 50px;
     height: 50px;
-    margin-bottom: 130px;
+    margin-bottom: 110px;
     cursor: pointer;
     overflow: hidden;
     border: 3px solid rgba(3, 5, 5, 0.5);

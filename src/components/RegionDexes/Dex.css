@@ -1,0 +1,17 @@
+.Dex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.pokemonDiv {
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.pokemonSprite {
+    width: 60px;
+    height: 60px;
+}
