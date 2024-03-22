@@ -1,13 +1,37 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, onMounted, ref, defineEmits } from 'vue';
+import { fetchMonDetails } from '@/utils/fetchMonDetails';
 
 const props = defineProps<{ pokemonId: number; }>();
 const { pokemonId } = props;
-console.log('Pokemon Id:', pokemonId);
+const pokemonDetails: any = ref(null);
+const emit = defineEmits(['goBack']);
+
+onMounted(async () => {
+    try {
+        const details = await fetchMonDetails(pokemonId);
+        pokemonDetails.value = details;
+    } catch (error) {
+        console.error('Error fetching details:', error);
+    }
+})
+
+function handleGoBack() {
+    emit('goBack');
+}
 </script>
 
 <template>
-    <h1>Single Pokemon's details</h1>
+    <div class="backArrow">
+        <img src="@/assets/backArrow.svg" alt="Back Arrow" @click="handleGoBack">
+    </div>
+    <div v-if="pokemonDetails">
+        <p class="detailsHeader"> #{{ pokemonDetails.id }} - {{ pokemonDetails.name }}</p>
+    </div>
 </template>
 
-<style></style>
+<style>
+.detailsHeader {
+    font-weight: bold;
+}
+</style>

@@ -8,6 +8,7 @@ const animationComplete = ref(false);
 const currentComponent: any = ref(null);
 const selectedGeneration = ref(0);
 const selectedPokemonId: any = ref(null);
+const previousComponent: any = ref(null);
 
 onMounted(() => { console.log("Mounted"); currentComponent.value = ''; })
 
@@ -18,48 +19,66 @@ function handleAnimationEnd() {
 }
 
 function updateCurrentComponent(newComponent: any) {
+    if (newComponent === MainMenu || newComponent === PokemonDetails) {
+        previousComponent.value = currentComponent.value;
+    } else if (newComponent === Dexes.KantoDex ||
+        newComponent === Dexes.JohtoDex ||
+        newComponent === Dexes.HoennDex ||
+        newComponent === Dexes.SinnohDex ||
+        newComponent === Dexes.UnovaDex ||
+        newComponent === Dexes.KalosDex ||
+        newComponent === Dexes.AlolaDex ||
+        newComponent === Dexes.GalarDex) {
+        previousComponent.value = MainMenu;
+    }
     currentComponent.value = markRaw(newComponent);
 }
+// function updateCurrentComponent(newComponent: any) {
+
+//     previousComponent.value = currentComponent.value;
+//     currentComponent.value = markRaw(newComponent);
+// }
 
 function handleGenSelection(genNumber: number) {
     console.log("selected generation:", genNumber);
     selectedGeneration.value = genNumber;
     switch (genNumber) {
         case 1:
-            currentComponent.value = Dexes.KantoDex;
+            updateCurrentComponent(Dexes.KantoDex);
+            // currentComponent.value = Dexes.KantoDex;
             break;
         case 2:
-            currentComponent.value = Dexes.JohtoDex;
+            updateCurrentComponent(Dexes.JohtoDex);
             break;
         case 3:
-            currentComponent.value = Dexes.HoennDex;
+            updateCurrentComponent(Dexes.HoennDex);
             break;
         case 4:
-            currentComponent.value = Dexes.SinnohDex;
+            updateCurrentComponent(Dexes.SinnohDex);
             break;
         case 5:
-            currentComponent.value = Dexes.UnovaDex;
+            updateCurrentComponent(Dexes.UnovaDex);
             break;
         case 6:
-            currentComponent.value = Dexes.KalosDex;
+            updateCurrentComponent(Dexes.KalosDex);
             break;
         case 7:
-            currentComponent.value = Dexes.AlolaDex;
+            updateCurrentComponent(Dexes.AlolaDex);
             break;
         case 8:
-            currentComponent.value = Dexes.GalarDex;
+            updateCurrentComponent(Dexes.GalarDex);
             break;
     }
     // currentComponent.value=useASwitchStateMentToRenderOneOfEightComponents
 }
 
 const goBack = () => {
-    currentComponent.value = MainMenu;
+    updateCurrentComponent(previousComponent.value);
 };
 
 function handleViewPokemon(pokemonId: number) {
     selectedPokemonId.value = pokemonId;
-    currentComponent.value = PokemonDetails;
+    updateCurrentComponent(PokemonDetails);
 }
 
 </script>

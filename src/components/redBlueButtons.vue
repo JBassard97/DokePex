@@ -15,7 +15,7 @@ const handleButtonPress = (color: string) => {
 .redBlueButtons {
     width: 100%;
     position: absolute;
-    bottom: 130px;
+    bottom: 115px;
     display: flex;
     justify-content: center;
 }
