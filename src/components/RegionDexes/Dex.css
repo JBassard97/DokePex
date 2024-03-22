@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    background-size: auto;
+    background-attachment: fixed;
 }
 
 .pokemonDiv {
@@ -14,4 +16,20 @@
 .pokemonSprite {
     width: 60px;
     height: 60px;
+}
+
+.backArrow {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+@media (max-width: 550px) {
+    .backArrow {
+        scale: 0.5;
+        margin-top: -3px;
+        margin-left: -3px;
+    }
 }

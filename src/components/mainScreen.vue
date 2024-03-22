@@ -2,10 +2,12 @@
 import { ref, onMounted, markRaw } from 'vue';
 import MainMenu from '@/components/MainMenu.vue';
 import Dexes from "./RegionDexes/index";
+import PokemonDetails from './PokemonDetails.vue';
 
 const animationComplete = ref(false);
 const currentComponent: any = ref(null);
 const selectedGeneration = ref(0);
+const selectedPokemonId: any = ref(null);
 
 onMounted(() => { console.log("Mounted"); currentComponent.value = ''; })
 
@@ -51,11 +53,21 @@ function handleGenSelection(genNumber: number) {
     // currentComponent.value=useASwitchStateMentToRenderOneOfEightComponents
 }
 
+const goBack = () => {
+    currentComponent.value = MainMenu;
+};
+
+function handleViewPokemon(pokemonId: number) {
+    selectedPokemonId.value = pokemonId;
+    currentComponent.value = PokemonDetails;
+}
+
 </script>
 
 <template>
     <div class="screen flash" @animationend="handleAnimationEnd">
-        <component :is="currentComponent" :genNumber="selectedGeneration" @selectGeneration="handleGenSelection">
+        <component :is="currentComponent" :genNumber="selectedGeneration" :pokemonId="selectedPokemonId"
+            @selectGeneration="handleGenSelection" @viewPokemon="handleViewPokemon" @goBack="goBack">
         </component>
     </div>
 </template>

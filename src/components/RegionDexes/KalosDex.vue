@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineEmits } from 'vue';
 import { getRegionDex } from '@/utils/fetchDex';
 import "./Dex.css";
 
@@ -14,9 +14,18 @@ onMounted(async () => {
         console.error("Error fetching Kanto Dex data:", error);
     }
 });
+
+const emit = defineEmits(['goBack']);
+
+const handleGoBack = () => {
+    emit('goBack');
+}
 </script>
 
 <template>
+    <div class="backArrow">
+        <img src="@/assets/backArrow.svg" alt="Back Arrow" @click="handleGoBack">
+    </div>
     <div class="Dex">
         <h3 class="genHeader">Kalos Dex</h3>
         <div v-for="(pokemon, index) of data" :key="index" class="pokemonDiv">

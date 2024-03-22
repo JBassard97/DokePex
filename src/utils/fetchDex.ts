@@ -43,49 +43,57 @@ async function getSpritesNamesNumbers(urlArray: any) {
 async function getRegionDex(generation: number) {
   let results: any = [];
 
-  switch (generation) {
-    //   ! KANT0
-    case 1:
-      results = await getSpritesNamesNumbers(await getURLs(151, 0));
-      break;
+  const cacheKey = `regionDex_${generation}`;
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    results = JSON.parse(cachedData);
+  } else {
 
-    //   ! JOHTO
-    case 2:
-      results = await getSpritesNamesNumbers(await getURLs(100, 151));
-      break;
+    switch (generation) {
+      //   ! KANT0
+      case 1:
+        results = await getSpritesNamesNumbers(await getURLs(151, 0));
+        break;
 
-    //   ! HOENN
-    case 3:
-      results = await getSpritesNamesNumbers(await getURLs(135, 251));
-      break;
+      //   ! JOHTO
+      case 2:
+        results = await getSpritesNamesNumbers(await getURLs(100, 151));
+        break;
 
-    //   ! SINNOH
-    case 4:
-      results = await getSpritesNamesNumbers(await getURLs(107, 386));
-      break;
+      //   ! HOENN
+      case 3:
+        results = await getSpritesNamesNumbers(await getURLs(135, 251));
+        break;
 
-    //   ! UNOVA
-    case 5:
-      results = await getSpritesNamesNumbers(await getURLs(156, 493));
-      break;
+      //   ! SINNOH
+      case 4:
+        results = await getSpritesNamesNumbers(await getURLs(107, 386));
+        break;
 
-    //   ! KALOS
-    case 6:
-      results = await getSpritesNamesNumbers(await getURLs(72, 649));
-      break;
+      //   ! UNOVA
+      case 5:
+        results = await getSpritesNamesNumbers(await getURLs(156, 493));
+        break;
 
-    //   ! ALOLA
-    case 7:
-      results = await getSpritesNamesNumbers(await getURLs(88, 721));
-      break;
+      //   ! KALOS
+      case 6:
+        results = await getSpritesNamesNumbers(await getURLs(72, 649));
+        break;
 
-    //   ! GALAR
-    case 8:
-      results = await getSpritesNamesNumbers(await getURLs(89, 809));
-      break;
+      //   ! ALOLA
+      case 7:
+        results = await getSpritesNamesNumbers(await getURLs(88, 721));
+        break;
 
-    default:
-      console.error(`Generation ${generation} not found!`);
+      //   ! GALAR
+      case 8:
+        results = await getSpritesNamesNumbers(await getURLs(89, 809));
+        break;
+
+      default:
+        console.error(`Generation ${generation} not found!`);
+    }
+    localStorage.setItem(cacheKey, JSON.stringify(results));
   }
   return results;
 }
