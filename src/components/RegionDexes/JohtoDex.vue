@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted,defineEmits } from 'vue';
+import { ref, onMounted, defineEmits } from 'vue';
 import { getRegionDex } from '@/utils/fetchDex';
 import "./Dex.css";
 
@@ -15,10 +15,14 @@ onMounted(async () => {
     }
 });
 
-const emit = defineEmits(['goBack']);
+const emit = defineEmits(['goBack', 'viewPokemon']);
 
 const handleGoBack = () => {
     emit('goBack');
+}
+
+const handleViewPokemon = (pokemonId: number) => {
+    emit('viewPokemon', pokemonId)
 }
 </script>
 
@@ -28,7 +32,7 @@ const handleGoBack = () => {
     </div>
     <div class="Dex">
         <h3 class="genHeader">Johto Dex</h3>
-        <div v-for="(pokemon, index) of data" :key="index" class="pokemonDiv">
+        <div v-for="(pokemon, index) of data" :key="index" class="pokemonDiv" @click="handleViewPokemon(pokemon.id)">
             <img :src="pokemon.sprite" :alt="pokemon.name" class="pokemonSprite" />
             <p class="pokemonDetails">{{ pokemon.id }} - {{ pokemon.name }} </p>
         </div>
