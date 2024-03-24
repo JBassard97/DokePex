@@ -2,6 +2,7 @@
 import { defineProps, onMounted, ref, defineEmits } from 'vue';
 import { fetchMonDetails } from '@/utils/fetchMonDetails';
 import "@/assets/typeColors.css";
+// Import 
 
 const props = defineProps<{ pokemonId: number; }>();
 const { pokemonId } = props;
@@ -11,17 +12,27 @@ const audioPlayer = ref<HTMLAudioElement | null>(null);
 const soundUrl = ref<string>('');
 const allSprites: any = ref([]);
 const currentIndex = ref<number>(0);
+const allAbilities = ref([]);
+const allMoves = ref([]);
+// Import functions to fetch move and ability details
 
 onMounted(async () => {
     try {
         const details = await fetchMonDetails(pokemonId);
         pokemonDetails.value = details;
 
-        const { cries } = details;
+        const { cries, moves, abilities, sprites } = details;
         soundUrl.value = cries.latest;
         playAudio();
 
-        const { sprites } = details;
+        // Extracting Moves
+        // api call here
+        allMoves.value = moves;
+
+        // Extracting Abilites
+        // api call here
+        allAbilities.value = abilities;
+        
         const { versions } = sprites
         const spritesContainer: string[] = [];
         spritesContainer.push(sprites.front_default);
