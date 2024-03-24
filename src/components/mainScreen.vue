@@ -97,6 +97,7 @@ function handleViewPokemon(pokemonId: number) {
     width: 90%;
     height: 75%;
     overflow: scroll;
+    scroll-behavior: smooth;
 }
 
 .screen::-webkit-scrollbar {
