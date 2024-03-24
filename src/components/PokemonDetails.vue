@@ -15,6 +15,7 @@ const currentIndex = ref<number>(0);
 const allAbilities = ref([]);
 const allMoves = ref([]);
 // Import functions to fetch move and ability details
+import {fetchAbilities} from "@/utils/fetchAbilities.ts";
 
 onMounted(async () => {
     try {
@@ -27,11 +28,21 @@ onMounted(async () => {
 
         // Extracting Moves
         // api call here
-        allMoves.value = moves;
+
+        
+        // put it in allMoves
+        // allMoves.value = moves;
 
         // Extracting Abilites
-        // api call here
-        allAbilities.value = abilities;
+        let abilityArray = [];
+        for (const ability of abilities) {
+            let abilityObject = {name: ability.name};
+            const abilityResults = await fetch(ability.url);
+            abilityObject.push(abilityResults);
+            abilityArray.push(abilityObject);
+        }
+        
+        allAbilities.value = abilityArray;
         
         const { versions } = sprites
         const spritesContainer: string[] = [];
