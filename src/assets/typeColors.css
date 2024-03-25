@@ -1,19 +1,29 @@
 .imageGallery {
-    border: 1px solid black;
     margin: 10px;
+}
+
+/* ! Targets the whole header for PokemonDetails */
+.wholeHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 
 .allDetails {
     height: 99%;
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 
 .detailsHeader {
     font-weight: bold;
     margin-top: 10px;
+    margin-bottom: 0;
 }
 
 .pokemonName {

@@ -32,8 +32,8 @@ const selectGen = (gen: any) => {
 }
 
 .header {
-    margin-bottom: 50px;
-    margin-top: 35px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .genGrid {
@@ -44,10 +44,29 @@ const selectGen = (gen: any) => {
     grid-gap: 20px;
 }
 
-.genItem,
+.genItem {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.genItem
 p {
     margin: 0;
     text-align: center;
     cursor: pointer;
+    padding: 0px 0px;
+    width: 70px;
+    padding: 10px 0px;
+    border-radius: 20px;
+    transition: scale .2s ease-in-out, background .2s ease-in-out;
+    background: rgba(245, 245, 245, 0.527);
+}
+
+.genItem p:hover{
+    scale: 1.2;
+    background: whitesmoke;
 }
 </style>
