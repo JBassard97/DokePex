@@ -11,18 +11,31 @@ const audioPlayer = ref<HTMLAudioElement | null>(null);
 const soundUrl = ref<string>('');
 const allSprites: any = ref([]);
 const currentIndex = ref<number>(0);
+const pokemonHeight = ref<number>(0);
+const pokemonWeight = ref<number>(0);
 
 onMounted(async () => {
     try {
+        // ! Extracting All Details
         const details = await fetchMonDetails(pokemonId);
         pokemonDetails.value = details;
 
+        // Extracting height and weight
+        const { height, weight } = details; // In decimeters and... hectograms wtf?
+        pokemonHeight.value = (height / 10);
+        pokemonWeight.value = (weight / 100);
+        console.log("Height:", pokemonHeight.value, "Weight:", pokemonWeight.value);
+
+        const { abilities } = details;
+
+        // ! Extracting Latest Cry
         const { cries } = details;
         soundUrl.value = cries.latest;
         playAudio();
 
+        //  ! Extracting Usable Sprites
         const { sprites } = details;
-        const { versions } = sprites
+        const { versions } = sprites;
         const spritesContainer: string[] = [];
         spritesContainer.push(sprites.front_default);
 
@@ -42,7 +55,7 @@ onMounted(async () => {
         }
 
         allSprites.value = spritesContainer.filter(sprite => sprite !== null);
-        console.log(allSprites.value);
+        console.log("Usable Sprites:", allSprites.value);
 
     } catch (error) {
         console.error('Error fetching details:', error);
@@ -59,6 +72,7 @@ function handleGoBack() {
     emit('goBack');
 }
 
+// ! Carousel Functionality
 function handlePrev() {
     if (currentIndex.value == 0) {
         currentIndex.value = allSprites.value.length - 1;
@@ -81,16 +95,18 @@ function handleNext() {
         <img src="@/assets/backArrow.svg" alt="Back Arrow" @click="handleGoBack">
     </div>
     <div v-if="pokemonDetails" class="allDetails">
-        <div class="wholeHeader">
-            <p class="detailsHeader"> #{{ pokemonDetails.id }} <span class="pokemonName">{{ pokemonDetails.name
-                    }}</span></p>
-            <p class="typesLine">
-                <span v-for="(type, index) in pokemonDetails.types" :key="index">
-                    <span :class="type.type.name" class="type">{{ type.type.name }}</span>
-                </span>
-            </p>
+        <div class="sticky">
+            <div class="wholeHeader">
+                <p class="detailsHeader"> #{{ pokemonDetails.id }} <span class="pokemonName">{{ pokemonDetails.name
+                        }}</span></p>
+                <p class="typesLine">
+                    <span v-for="(type, index) in pokemonDetails.types" :key="index">
+                        <span :class="type.type.name" class="type">{{ type.type.name }}</span>
+                    </span>
+                </p>
+            </div>
             <div class="carousel">
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     stroke="#1dddf7" transform="matrix(-1, 0, 0, 1, 0, 0)" @click="handlePrev" class="prev">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -100,8 +116,8 @@ function handleNext() {
                             fill=""></path>
                     </g>
                 </svg>
-                <img :src="allSprites[currentIndex]">
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                <img :src="allSprites[currentIndex]" @click="playAudio">
+                <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     stroke="#1dddf7" @click="handleNext" class="next">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -113,6 +129,10 @@ function handleNext() {
                 </svg>
             </div>
         </div>
+        <p class="metricsLine">
+            <span class="height">Height: {{ pokemonHeight }}m</span>
+            <span class="weight">Weight: {{ pokemonWeight }}kg</span>
+        </p>
     </div>
     <audio ref="audioPlayer" :src="soundUrl" autoplay></audio>
 </template>
@@ -122,17 +142,29 @@ function handleNext() {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     position: relative;
+    height: 100px;
 }
 
 .carousel img {
     margin-top: 10px;
-    height: 30%;
+    height: 100%;
     aspect-ratio: 1;
+    cursor: pointer;
 }
 
 .carousel svg {
     cursor: pointer;
+}
+
+.metricsLine {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.sticky {
+    position: sticky;
 }
 </style>

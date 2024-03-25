@@ -28,8 +28,8 @@
 
 @media (max-width: 550px) {
     .backArrow {
-        scale: 0.5;
-        margin-top: -3px;
-        margin-left: -3px;
+        scale: 0.4;
+        margin-top: -1.5px;
+        margin-left: -1.5px;
     }
 }
